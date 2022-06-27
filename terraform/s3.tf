@@ -31,3 +31,11 @@ module "s3_athena_bucket" {
 
   tags = local.tags
 }
+
+# Adding csv file to bucket
+resource "aws_s3_object" "superheroes" {
+  key                    = "superheroes-data"
+  bucket                 = module.s3_athena_bucket.s3_bucket_id
+  source                 = "../assets/heroes_information.csv"
+  server_side_encryption = "AES256"
+}
