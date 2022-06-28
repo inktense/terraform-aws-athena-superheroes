@@ -18,3 +18,10 @@ variable "tags" {
     Initialised = "20220627"
   }
 }
+
+# TF has a bug that not lets you add just one Glue worker
+variable "glue_number_of_workers" {
+  description = "Number of workers for Glue jobs."
+  type        = number
+  default     = 2
+}
