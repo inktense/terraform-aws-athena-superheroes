@@ -6,78 +6,6 @@ resource "aws_glue_catalog_database" "glue_catalog_database" {
   # tags = local.tags
 }
 
-# Adding Glue catalogue table because crawler does not detect file headers
-# resource "aws_glue_catalog_table" "aws_glue_catalog_table" {
-#   name          = "superheroes"
-#   database_name = aws_glue_catalog_database.glue_catalog_database.name
-
-#   table_type = "EXTERNAL_TABLE"
-
-#   storage_descriptor {
-#     location      = "s3://${module.s3_athena_bucket.s3_bucket_id}/superheroes-data"
-#     # input_format  = "org.apache.hadoop.mapred.TextInputFormat"
-#     # output_format = "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
-
-#     # ser_de_info {
-#     #   serialization_library = "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe"
-
-#     #   parameters = {
-#     #     "serialization.format" = 1
-#     #   }
-#     # }
-
-#     columns {
-#       name = "name"
-#       type = "string"
-#     }
-
-#     columns {
-#       name = "gender"
-#       type = "string"
-#     }
-
-#     columns {
-#       name = "eye color"
-#       type = "string"
-#     }
-
-#     columns {
-#       name = "race"
-#       type = "string"
-#     }
-
-#     columns {
-#       name = "hair color"
-#       type = "string"
-#     }
-
-#     columns {
-#       name = "height"
-#       type = "double"
-#     }
-
-#     columns {
-#       name = "publisher"
-#       type = "string"
-#     }
-
-#     columns {
-#       name = "skin color"
-#       type = "string"
-#     }
-
-#     columns {
-#       name = "alignment"
-#       type = "string"
-#     }
-
-#     columns {
-#       name = "weight"
-#       type = "double"
-#     }
-
-#   }
-# }
 #--------------------------------------------------------------
 # Crawlers
 #--------------------------------------------------------------
@@ -95,11 +23,6 @@ resource "aws_glue_crawler" "superheroes_glue_crawler" {
     s3_target {
     path = "s3://${module.s3_athena_bucket.s3_bucket_id}/superheroes"
   }
-
-  # catalog_target {
-  #   database_name = aws_glue_catalog_database.glue_catalog_database.name
-  #   tables        = [aws_glue_catalog_table.aws_glue_catalog_table.name]
-  # }
 
   tags = local.tags
 }
