@@ -61,3 +61,18 @@ resource "aws_glue_job" "superheroes_job" {
 
   tags = local.tags
 }
+
+#--------------------------------------------------------------
+# Job Triggers
+#--------------------------------------------------------------
+// Triggring the superheroes Glue Crawler
+resource "aws_glue_trigger" "superheroes_job_trigger" {
+  name     = "${var.project_prefix}-superheroes-job-trigger"
+  schedule = "cron(0 06 ? * MON-FRI *)" // At 06:00 AM, Monday through Friday
+  type     = "SCHEDULED"
+
+  actions {
+    job_name = aws_glue_job.superheroes_job.name
+  }
+}
+
