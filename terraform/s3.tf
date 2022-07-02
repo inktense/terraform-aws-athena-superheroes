@@ -68,7 +68,7 @@ module "s3_python_scripts_bucket" {
 
 # Adding csv file to bucket
 resource "aws_s3_object" "superheroes" {
-  key                    = "superheroes-data"
+  key                    = "superheroes/superheroes-data.csv"
   bucket                 = module.s3_athena_bucket.s3_bucket_id
   source                 = "../assets/heroes_information.csv"
   server_side_encryption = "AES256"

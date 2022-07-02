@@ -30,6 +30,8 @@ data "aws_iam_policy_document" "s3_glue_policy" {
       "s3:ListAllMyBuckets",
       "s3:GetBucketAcl",
       "s3:GetObject",
+      "s3:PutObject",
+      "s3:DeleteObject",
     ]
 
     resources = [
