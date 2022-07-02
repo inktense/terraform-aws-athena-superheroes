@@ -73,3 +73,11 @@ resource "aws_s3_object" "superheroes" {
   source                 = "../assets/heroes_information.csv"
   server_side_encryption = "AES256"
 }
+
+
+resource "aws_s3_object" "python_script" {
+  key                    = "superheroes/superheroes.py"
+  bucket                 = module.s3_python_scripts_bucket.s3_bucket_id
+  source                 = "../assets/python_scripts/superheroes.py"
+  server_side_encryption = "AES256"
+}
